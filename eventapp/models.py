@@ -9,7 +9,7 @@ from .images import make_thumbnail
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+
 
 
 class Postevent(models.Model):
