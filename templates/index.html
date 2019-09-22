@@ -1,0 +1,10 @@
+
+{%block event_content %}
+<div class="col-md-8">
+<h1>Mic Test</h1>
+{%for photo in object_list%}
+<h1>{{photo.title}}</h1>
+<img src="{{ photo.eventphoto.url}}" alt="{{ photo.title }}">
+{% endfor %}
+</div>
+{% endblock event_content%} 

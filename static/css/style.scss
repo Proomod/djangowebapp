@@ -1,0 +1,47 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat";
+
+  background: radial-gradient(50% 50% at 50% 50%, #2b3780 0%, #0b1023 100%);
+
+  font-family: "Manjari", sans-serif;
+}
+
+h1 {
+  margin: 5rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 1rem;
+  cursor: pointer;
+
+  .card {
+    border-radius: 5px;
+    transition: transform 0.4s;
+
+    &:hover {
+      transform: translateY(-5px);
+      border: 2px solid rgb(66, 178, 243);
+    }
+
+    .info {
+      padding: 1rem;
+      //display: none;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .desc {
+      color: black;
+    }
+  }
+}

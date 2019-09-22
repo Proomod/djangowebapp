@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="titlebox">
+<div class="btn-group buttons">
+<a href="{% url 'gallery:upcoming' %}"><div class="upcoming ">Upcoming</div></a>
+<a href="{% url 'gallery:completed' %}"><div class="completed">Completed</div></a>
+</div>
+</div>
+
+
+<main>
+
+{% for event in  events %}
+
+<div class=card>
+    <div class="info">
+    <strong class='title'>{{event.title}}</strong>
+    <p id="created_date">{{event.created_date}}</p><br>
+    <p class="desc">{{event.reduceddescription}}.....</p>
+    </div>
+
+      {%for img in event.images%}
+        <img class ="img" src={{img.image.url}} height=500px width=100%>
+        {% endfor %}
+  </div>
+{% endfor %}
+</main>
+{% endblock content %}

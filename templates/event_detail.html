@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load photo_tags %}
+{% block content %}
+<div class="container text-white">
+<Strong class=title>{{event.title|title}}</strong>
+<p class=created_date>{{event.created_date}}</p>
+<p class=desc>{{event.description}}</p>
+</div>
+<main>
+
+{% for image in  event.images %}
+
+<div class="card gallery">
+    
+
+      <a href="{{image.image.url}}">
+							
+        <img class ="img" src={{image.thumbnail.url}} height=400px width=100%>
+        </a>
+  </div>
+{% endfor %}
+</main>
+
+<div class="members">
+{%for images in event.images%}
+    <img src={{images.thumbnail.url}}>
+    {%endfor%}
+
+</div>
+
+
+{% comment %} {%if forloop.counter|divisibleby:2 %} {% endcomment %}
+
+{% comment %} <br><br>
+{%endif%}
+{% endfor %}
+<div class="col-sm-4"></div>
+<div class="col-sm-1"></div>
+</div>
+</div>
+<div class="described">
+<p>{{event.description}}</p>
+</div>
+</div> {% endcomment %}
+{% endblock content %}
+{% block script %}
+	$(document).ready(function() {
+            console.log("hello");
+			$('.gallery a').simpleLightbox();
+		});
+{% endblock script %}

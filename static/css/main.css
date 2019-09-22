@@ -1,0 +1,104 @@
+.mybrand {
+  position: fixed;
+}
+
+.logo_container {
+  display: flex;
+}
+.title_rectangle {
+  position: absolute;
+  width: 137px;
+  height: 35px;
+  left: 0px;
+  top: 188px;
+  background: #181818;
+}
+.titlebox {
+  position: relative;
+  height: 200px;
+}
+.btn-group {
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  /* -ms-transform: translateY(-50%); */
+  transform: translateY(-50%);
+}
+.upcoming {
+  position: relative;
+  top: 8rem;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(230, 230, 230);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  width: 10rem;
+  text-align: center;
+  font-weight: bold;
+}
+.contain {
+  position: relative;
+}
+.completed {
+  margin-left: 1rem;
+  position: relative;
+  top: 8rem;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(230, 230, 230);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  width: 10rem;
+  text-align: center;
+  font-weight: bold;
+}
+.upcoming:hover,
+.completed:hover {
+  background-color: #ff8d1e;
+}
+.img {
+  border-radius: 5px;
+  opacity: 1;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.text {
+  background-color: rgba(168, 204, 215, 0.7);
+  border: 3px solid rgb(255, 141, 30);
+  border-radius: 5px;
+  color: rgb(255, 141, 30);
+  font-size: 1.4em;
+  padding: 10px 20px;
+  text-align: center;
+  align-content: center;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+.middle:hover .text {
+  background-color: #2b3780;
+  border: 4px solid rgb(255, 141, 30);
+}
+
+.contain:hover .img {
+  opacity: 0.6;
+}
+.contain:hover .middle {
+  opacity: 1;
+}
+.title {
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
