@@ -3,7 +3,7 @@ from PIL import Image
 from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-import misaka
+
 from django.template.defaultfilters import truncatechars
 from .images import make_thumbnail
 from django.contrib.auth.models import User
