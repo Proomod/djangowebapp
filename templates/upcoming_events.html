@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% block content %}
 <div class="titlebox">
 <div class="btn-group">
 <a href="{% url 'gallery:upcoming' %}"><div class="upcoming ">Upcoming</div></a>
@@ -41,7 +40,6 @@
 
 {% endfor %}
 </main>
-{% endblock content %}
 {{% block script %}
 $(document).on('click', '.confirm-delete', function(){
   {% comment %} alert("Are you sure?") {% endcomment %}
