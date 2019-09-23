@@ -125,7 +125,6 @@ a:active {
   text-decoration: none;
 }
 @media only screen and (max-width: 600px) {
-
 }
 .titlebox {
   position: relative;
@@ -143,7 +142,6 @@ a:active {
     transform: translateY(-50%);
   }
 }
-
 
 @media only screen and (max-width: 768px) {
   .btn-group {
