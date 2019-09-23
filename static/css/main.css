@@ -47,6 +47,7 @@ body {
   width: 10rem;
   text-align: center;
   font-weight: bold;
+  color: rgb(252, 134, 16);
 }
 .contain {
   position: relative;
@@ -64,10 +65,12 @@ body {
   width: 10rem;
   text-align: center;
   font-weight: bold;
+  color: rgb(252, 134, 16);
 }
 .upcoming:hover,
 .completed:hover {
   background-color: #ff8d1e;
+  color: white;
 }
 .img {
   border-radius: 5px;
@@ -252,10 +255,11 @@ a:active {
   position: relative;
 }
 .about {
+  margin: 2rem;
   position: relative;
   background-color: black;
   font-family: Rajdhani, sans-serif;
-  font-size: 15px;
+  font-size: 18px;
 }
 button .read-more {
   position: absolute;
@@ -271,4 +275,14 @@ button .read-more {
 .close-clients {
   height: 15rem;
   background-color: rgb(255, 141, 30);
+}
+.title {
+  margin: 2rem;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: rgb(252, 134, 16);
+  font-size: 3rem;
+}
+.member_container {
+  margin: 15rem;
 }
