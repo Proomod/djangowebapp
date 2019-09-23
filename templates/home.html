@@ -105,7 +105,7 @@ f
         </a>
   </div>
 </header>
-
+<div class="upcoming_event_btn">lkasjdflk</div>
 <div class=about >
 <strong class=title>About</strong>
 <p >{% lorem 5 %}</p>
@@ -117,15 +117,16 @@ f
 </div>
 <div class="titlebox">
 <div class="btn-group">
-<div class="upcoming " id=upcoming_events>Upcoming</div>
-<div class="completed" id=completed_events>Completed</div>
+
+<a><div class="upcoming " id="upcoming_events">Upcoming</div></a>
+<a><div class="completed" id="completed_events">Completed</div></a>
 </div>
 </div>
 <br>
 
 
 
-<main id=upcoming_events_main style="display:none">
+<main id=upcoming_events_main>
 
 {% for event in  upcoming_events %}
 
@@ -157,7 +158,7 @@ f
 {% endfor %}
 </main>
 
-<main id=completed_events_main>
+<main id=completed_events_main style="display:none">
 
 {% for event in  completed_events %}
 
@@ -195,17 +196,23 @@ f
     <script src="{% static 'js/bootstrap.min.js' %}" async defer></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
  <script>
- $("#upcoming_events").click(function(){
-     alert("hello");
-     $("#upcoming_events_main").css("display":"block");
-     $("#completed_events_main").css("display":"none");
 
+ $(".upcoming").click(function(e){
+     
+         $("#upcoming_events_main").css("display","block");
+         $("#completed_events_main").css("display","none");
  })
- $("#completed_events").click(function(){
-     $("#upcoming_events_main").css("display":"none");
-     $("#completed_events_main").css("display":"block");
-    alert("hello");
- })
+     $(".completed").click(function(e){
+         
+         $("#upcoming_events_main").css("display","none");
+         $("#completed_events_main").css("display","block");
+     
+     
+    
+ });
+    
+     
+
  </script>
 
 

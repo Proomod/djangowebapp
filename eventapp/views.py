@@ -98,7 +98,7 @@ def homePage(request):
                 event.person = models.People.objects.get(id=memberobj.person.id)
         except:
             pass
-    completed_events = models.Postevent.objects.filter(completed=False).order_by(
+    completed_events = models.Postevent.objects.filter(completed=True).order_by(
         "-created_date"
     )[:10]
     for event in completed_events:
