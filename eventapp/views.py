@@ -179,7 +179,6 @@ def add_member(request, pid, mid):
                 except:
 
                     nmember = models.Members()
-
                     nmember.person = person
                     nmember.post = post
                     nmember.save()
