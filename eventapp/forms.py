@@ -4,7 +4,7 @@ from .models import Postevent, Images, Members
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(max_length=128)
-    decription = forms.CharField(max_length=245, label="Item Description.")
+    description = forms.Textarea()
 
     class Meta:
         model = Postevent

@@ -23,7 +23,7 @@
     <div class='title'>{{event.title|title}}</div>
    
     <p class="date"><i class="fa fa-calendar" aria-hidden="true"></i>{{event.created_date}}</p>
-    <p class="desc">{{event.description|truncatewords:30}}</p>
+    <p class="desc">{{event.description|truncatewords:10}}</p>
     </div>
 <div class="contain embed-responsive embed-responsive-16by9">
       {%for img in event.images%}

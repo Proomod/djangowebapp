@@ -8,12 +8,9 @@ from .images import make_thumbnail
 from django.contrib.auth.models import User
 
 
-
-
-
 class Postevent(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    # slug = models.SlugField(unique=False)
+    slug = models.SlugField(unique=True, default="duck")
     title = models.CharField(max_length=200)
     description = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -21,7 +18,7 @@ class Postevent(models.Model):
 
     def get_image_filename(instance, filename):
         title = instance.post.title
-        # slug = slugify(title)
+        slug = slugify(title)
         return "post_images/%s-%s" % (filename)
 
     @property
@@ -29,7 +26,7 @@ class Postevent(models.Model):
         return truncatechars(self.description, 100)
 
     def save(self, *args, **kwargs):
-        # self.slug = slugify(self.title)
+        self.slug = slugify(self.title)
         super().save(*args, **kwargs)  # Call the real save() method
 
     def __str__(self):

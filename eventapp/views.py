@@ -123,21 +123,6 @@ def completed_events(request):
     return render(request, "completed_events.html", {"events": events})
 
 
-# class PosteventDeleteview(LoginRequiredMixin, generic.DeleteView):
-#     model = models.Postevent
-
-#     success_url = reverse_lazy("/")
-#     template_name = "gallery/deleted.html"
-
-#     # def get_queryset(self):
-#     #     queryset = super().get_queryset()
-#     #     return queryset.filter(id=self.request.id)
-
-#     def delete(self, *args, **kwargs):
-#         messages.success(self.request, "Event Deleted")
-#         return super().delete(*args, **kwargs)
-
-
 @login_required
 def deletepost(request, id):
     deleted = models.Postevent.objects.get(id=id)
@@ -149,10 +134,10 @@ def deletepost(request, id):
 def add_members(request, id):
     people = models.People.objects.all()
     try:
-        post = models.Postevent.objects.get(id=id)
+        event = models.Postevent.objects.get(id=id)
         for person in people:
             try:
-                member = models.Members.objects.filter(post=post).get(person=person)
+                member = models.Members.objects.filter(event=event).get(person=person)
                 if member:
                     person.truth = True
             except:
@@ -166,12 +151,14 @@ def add_members(request, id):
 def add_member(request, pid, mid):
     if request.method == "POST":
         try:
-            post = models.Postevent.objects.get(id=pid)
+            event = models.Postevent.objects.get(id=pid)
             try:
                 person = models.People.objects.get(id=mid)
                 try:
 
-                    member = models.Members.objects.filter(person=person).get(post=post)
+                    member = models.Members.objects.filter(person=person).get(
+                        event=event
+                    )
                     if member:
                         member.delete()
                         truth = "false"
@@ -180,7 +167,7 @@ def add_member(request, pid, mid):
 
                     nmember = models.Members()
                     nmember.person = person
-                    nmember.post = post
+                    nmember.event = event
                     nmember.save()
 
                     return JsonResponse({"data": "true"})

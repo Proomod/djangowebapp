@@ -2,7 +2,26 @@
 {% block content %}
 <p class="postid" id={{pid}}></p>
 <div class="row text-white">
-    <div class="col-md-3 col-sm-0"></div>
+    <div class="col-md-3 col-sm-0">
+        {% for person in people %}
+<ul>
+
+
+{% if person.truth %}
+<li>
+{{person.first_name}} {{person.last_name}}
+</li>
+
+{% endif %}
+
+
+
+
+</ul>
+    
+    {% endfor %}
+    
+    </div>
     <div class="col-md-6 col-sm-12">
     {% for person in people %}
 <ul>
@@ -44,13 +63,8 @@
                     type:'POST',
                     data:{ csrfmiddlewaretoken: "{{ csrf_token }}"},
                     success:function(data){
-                        alert(data.truth);
-                      if(data.data){
-                            ($this).prop=true
-                        }
-                        else{
-                            $(this).val=false
-                        }
+                        alert(data.data);
+                      
                     } 
         })
     })
