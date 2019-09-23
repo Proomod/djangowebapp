@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container text-white">
-<div class=title1>{{event.title|title}}</div>
-<p class=created_date>{{event.created_date}}</p>
+<div class="title title-expanded">{{event.title|title}}</div>
+<p class=date>{{event.created_date}}</p>
 <p class=desc>{{event.description}}</p>
 </div>
 <main>
-
+ 
 {% for image in  event.images %}
 
 <div class="gallery">

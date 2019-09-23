@@ -14,6 +14,7 @@ f
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Optional theme -->
     
@@ -33,8 +34,7 @@ f
     <link rel="stylesheet" href="{% static 'css/ekko-lightbox.css' %}">
     {% comment %} <link rel="stylesheet" href="{% static 'css/gallery.css' %}"> {% endcomment %}
 
-    <link href="https://fonts.googleapis.com/css?family=Manjari|Saira+Extra+Condensed|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:900|Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Manjari|Rubik+Mono+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Rajdhani:700&display=swap" rel="stylesheet">
 </head>
 
@@ -42,28 +42,33 @@ f
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-   <nav class=" navbar navbar-expand-lg navbar-light bg-light fixed-top mb-1 mynav">
+   <nav class=" navbar navbar-expand-lg navbar-light bg-light fixed-top mb-1 mynav" id=navbar>
   <a class="navbar-brand" href="/"><img src="{% static 'icons/B&Blogo.png' %}" height=50 width=50></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
+    {%if user.is_authenticated%}
+    <li>
+    <a class="nav-link" href="/post/">Post </a>
+    </li>
+    {%endif%}
+      <li class="nav-item">
+        <a class="nav-link" href="/about/">About </a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Events <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Events</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link"  href="/contact/">Contact</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
+          See More
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="/gallery/">Gallery</a>
           <a class="dropdown-item" href="#">Another action</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
@@ -122,8 +127,8 @@ f
 <div class="col-xs-12 col-sm-6 col-md-3">
 <div class="widget no-box">
 <h5 class="widget-title">Get Started<span></span></h5>
-<p>Get access to your full Training and Marketing Suite.</p>
-<a class="btn" href="#." target="_blank">Register Now</a>
+<p>Unvail the gaming Experience with us.</p>
+<a class="btn" href="#." target="_blank">Search</a>
 </div>
 </div>
 
@@ -168,6 +173,8 @@ f
 
     {% endblock script %}
     </script>
+
+    
 <script>
     $( document ).ready(function() {
 $(document).on('click', '[data-toggle="lightbox"]', function(event) {
@@ -176,6 +183,13 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 });
 });
 </script>
+    <script>
+$(document).ready(function() {
+    $(document).on('click', '.nav-item a', function (e) {
+        $(this).parent().addClass('active').siblings().removeClass('active');
+    });
+});
+    </script>
 </body>
 
 </html>
