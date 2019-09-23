@@ -1,3 +1,13 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(50% 50% at 50% 50%, #2b3780 0%, #0b1023 100%);
+  font-family: "Manjari", sans-serif;
+}
 .mybrand {
   position: fixed;
 }
@@ -84,7 +94,7 @@
   padding: 10px 20px;
   text-align: center;
   align-content: center;
-  font-family: "Montserrat";
+  font-family: "Manjari";
   font-weight: bold;
 }
 .middle:hover .text {
@@ -99,8 +109,20 @@
   opacity: 1;
 }
 .title {
-  font-weight: bold;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 30px;
+  font-family: "Rubik Mono One", sans-serif;
+}
+.date {
+  font-family: "Rajdhani", sans-serif;
+}
+.title-expanded {
+  font-size: 40px;
+}
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
 }
 @media only screen and (max-width: 600px) {
 

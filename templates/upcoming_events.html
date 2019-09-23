@@ -16,18 +16,18 @@
 
 <div class=card>
 {%if user.is_authenticated%}
-  <a class="confirm-delete" href="{% url 'gallery:delete' id=event.id %}" ...>Delete</a>
+  <a class="confirm-delete" href="{% url 'gallery:delete' id=event.id %}"><span class="fa fa-remove"></span></a>
   {%endif%}
     
     <div class="info">
-    <strong class='title'>{{event.title}}</strong>
+    <div class='title'>{{event.title|title}}</div>
    
-    <p id="created_date">{{event.created_date}}</p><br>
-    <p class="desc">{{event.description|truncatewords:50}}</p>
+    <p class="date"><i class="fa fa-calendar" aria-hidden="true"></i>{{event.created_date}}</p>
+    <p class="desc">{{event.description|truncatewords:30}}</p>
     </div>
-<div class=contain>
+<div class="contain embed-responsive embed-responsive-16by9">
       {%for img in event.images%}
-        <img class ="img" src={{img.image.url}} height=500px width=100%>
+        <img class ="img embed-responsive-item" src={{img.image.url}} height=500px width=100%>
         {% endfor %}
         <a href="{% url 'gallery:eventdetail' id=event.id %}">
         <div class="middle">

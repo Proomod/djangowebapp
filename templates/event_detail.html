@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
-{% load photo_tags %}
 {% block content %}
 <div class="container text-white">
-<Strong class=title>{{event.title|title}}</strong>
-<p class=created_date>{{event.created_date}}</p>
+<div class="title title-expanded">{{event.title|title}}</div>
+<p class=date>{{event.created_date}}</p>
 <p class=desc>{{event.description}}</p>
 </div>
 <main>
-
+ 
 {% for image in  event.images %}
 
-<div class="card gallery">
+<div class="gallery">
     
 
-      <a href="{{image.image.url}}">
+      <a href="{{image.image.url}}" data-toggle="lightbox" data-gallery="example-gallery" data-type="image">
 							
-        <img class ="img" src={{image.thumbnail.url}} height=400px width=100%>
+        <img class ="img img-fluid img-thumbnail" src={{image.thumbnail.url}} height=400px width=100%>
         </a>
   </div>
 {% endfor %}
@@ -44,8 +43,4 @@
 </div> {% endcomment %}
 {% endblock content %}
 {% block script %}
-	$(document).ready(function() {
-            console.log("hello");
-			$('.gallery a').simpleLightbox();
-		});
 {% endblock script %}
