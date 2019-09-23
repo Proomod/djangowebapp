@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
+
 <html class="no-js">
 <!--<![endif]-->
 f
@@ -26,7 +23,7 @@ f
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Rajdhani:700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body class=text-white>
 <style>
 .carousel-item {
   height: 100vh;
@@ -80,7 +77,7 @@ f
       <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">First Slide</h2>
-          <p class="lead">This is a description for the first slide.</p>
+          <p class="lead imagetext">This is a description for the first slide.</p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
@@ -109,84 +106,110 @@ f
   </div>
 </header>
 
-<!-- Page Content -->
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
+<div class=about >
+<strong class=title>About</strong>
+<p >{% lorem 5 %}</p>
+<form action="../about" type=get>
+<button class="btn btn-primary btn-sm" type=submit>Read More</button>
+</form>
+<div class=close-clients>
 
+</div>
+<div class="titlebox">
+<div class="btn-group">
+<div class="upcoming " id=upcoming_events>Upcoming</div>
+<div class="completed" id=completed_events>Completed</div>
+</div>
+</div>
+<br>
+
+
+
+<main id=upcoming_events_main style="display:none">
+
+{% for event in  upcoming_events %}
+
+<div class=card>
+{%if user.is_authenticated%}
+  <a class="confirm-delete" href="{% url 'gallery:delete' id=event.id %}"><span class="fa fa-remove"></span></a>
+  {%endif%}
     
-    {% comment %} <div class="swiper-container homecontainer">
-  
-      <div class="topnav">
-      <a href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-        </div>
-        <p class=imagetext>{% lorem 1 b random %}</p>
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper imagewrapper">
-        <div class="topnav">
-      <a href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-        </div>
-        <!-- Slides -->
-        <div class="swiper-slide"><img src="../media/images/batman_arkham_city_joker_smile_suit_flower_fan_art_black_and_white_19699_2560x144_QQTsKLw.jpg">
-        </div>
-        <div class="swiper-slide"></div>
-        <div class="swiper-slide">Slide 3</div>
-           <div class="topnav">
-      <a href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-        </div>
-        ...
+    <div class="info">
+    <div class='title'>{{event.title|title}}</div>
+   
+    <p class="date"><i class="fa fa-calendar" aria-hidden="true"></i>{{event.created_date}}</p>
+    <p class="desc">{{event.description|truncatewords:10}}</p>
     </div>
+<div class="contain embed-responsive embed-responsive-16by9">
+      {%for img in event.images%}
+        <img class ="img embed-responsive-item" src={{img.image.url}} height=500px width=100%>
+        {% endfor %}
+        <a href="{% url 'gallery:eventdetail' id=event.id %}">
+        <div class="middle">
+        <div class=text>View Event</div>
+        </div>
+        </a>
 
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
+  </div>
+  
+  </div>
 
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+{% endfor %}
+</main>
 
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div>
-</div> {% endcomment %}
+<main id=completed_events_main>
+
+{% for event in  completed_events %}
+
+<div class=card>
+{%if user.is_authenticated%}
+  <a class="confirm-delete" href="{% url 'gallery:delete' id=event.id %}"><span class="fa fa-remove"></span></a>
+  {%endif%}
+    
+    <div class="info">
+    <div class='title'>{{event.title|title}}</div>
+   
+    <p class="date"><i class="fa fa-calendar" aria-hidden="true"></i>{{event.created_date}}</p>
+    <p class="desc">{{event.description|truncatewords:10}}</p>
+    </div>
+<div class="contain embed-responsive embed-responsive-16by9">
+      {%for img in event.images%}
+        <img class ="img embed-responsive-item" src={{img.image.url}} height=500px width=100%>
+        {% endfor %}
+        <a href="{% url 'gallery:eventdetail' id=event.id %}">
+        <div class="middle">
+        <div class=text>View Event</div>
+        </div>
+        </a>
+
+  </div>
+  
+  </div>
+
+{% endfor %}
+</main>
+
 
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}" async defer></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-    <script>
-   var mySwiper = new Swiper ('.swiper-container', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
+ <script>
+ $("#upcoming_events").click(function(){
+     alert("hello");
+     $("#upcoming_events_main").css("display":"block");
+     $("#completed_events_main").css("display":"none");
 
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
+ })
+ $("#completed_events").click(function(){
+     $("#upcoming_events_main").css("display":"none");
+     $("#completed_events_main").css("display":"block");
+    alert("hello");
+ })
+ </script>
 
-    // Navigation arrows
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
 
-    // And if we need scrollbar
-   // scrollbar: {
-   //   el: '.swiper-scrollbar',
-    //},
-  })
-    </script>
-
-    <style>
+  
 </body>
 
 </html>

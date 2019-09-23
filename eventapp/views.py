@@ -7,6 +7,8 @@ from django.views import generic
 from django.http import Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from .models import *
+
 
 from eventapp import models
 from django.http import HttpResponseRedirect, HttpResponse
@@ -81,6 +83,41 @@ def post(request):
 #         fss = FileSystemStorage()
 #         fss.save("members/" + image.name, image)
 #         return redirect()
+
+
+def homePage(request):
+    people = People.objects.all()
+    upcoming_events = models.Postevent.objects.filter(completed=False).order_by(
+        "-created_date"
+    )[:10]
+    for event in upcoming_events:
+        event.images = models.Images.objects.filter(post=event)[:1]
+        try:
+            memberobjs = models.Members.objects.filter(post=event)
+            for memberobj in memberobjs:
+                event.person = models.People.objects.get(id=memberobj.person.id)
+        except:
+            pass
+    completed_events = models.Postevent.objects.filter(completed=False).order_by(
+        "-created_date"
+    )[:10]
+    for event in completed_events:
+        event.images = models.Images.objects.filter(post=event)[:1]
+        try:
+            memberobjs = models.Members.objects.filter(post=event)
+            for memberobj in memberobjs:
+                event.person = models.People.objects.get(id=memberobj.person.id)
+        except:
+            pass
+    return render(
+        request,
+        "home.html",
+        {
+            "team": people,
+            "upcoming_events": upcoming_events,
+            "completed_events": completed_events,
+        },
+    )
 
 
 def showGallery(request):

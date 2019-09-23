@@ -24,7 +24,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("eventapp.urls"), name="content"),
     path("accounts/", include("accountapp.urls")),
-    path("home/", views.HomePage.as_view(), name="home"),
     path("index/", views.ThanksPage.as_view()),
 ]
 #  path("login/", auth_views.LoginView.as_view(), name="login"),
