@@ -2,8 +2,11 @@
 {% block content %}
 <p class="postid" id={{pid}}></p>
 <div class="row text-white">
-    <div class="col-md-3 col-sm-0"></div>
+    <div class="col-md-3 col-sm-0">
+        
+    </div>
     <div class="col-md-6 col-sm-12">
+        <container class="heading h4" >Add Members</container>
     {% for person in people %}
 <ul>
 <li>
@@ -44,13 +47,8 @@
                     type:'POST',
                     data:{ csrfmiddlewaretoken: "{{ csrf_token }}"},
                     success:function(data){
-                        alert(data.truth);
-                      if(data.data){
-                            ($this).prop=true
-                        }
-                        else{
-                            $(this).val=false
-                        }
+                        alert(data.data);
+                      
                     } 
         })
     })

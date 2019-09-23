@@ -56,17 +56,26 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Contact</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+      
     </ul>
+    <ul class="navbar-nav ml-auto mr-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Action
+            </a>
+            <div class="dropdown-menu ml-auto mr-5 " aria-labelledby="navbarDropdownMenuLink">
+              
+              <a class="dropdown-item" href="#">Gallery</a>
+              {%if user.is_authenticated%}
+              <a class="dropdown-item" href="../post/">Post Events</a>
+              <a class="dropdown-item" href="../accounts/logout/">Logout</a>
+              {%else%}
+              <a class="dropdown-item" href="../accounts/login/">Login</a>
+              {%endif%}
+              
+            </div>
+          </li>
+      </ul>
   </div>
 </nav>
 <br><br><br>

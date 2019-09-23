@@ -7,8 +7,10 @@ from django.views import generic
 from django.http import Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from eventapp.models import * 
+from eventapp import models 
+import json
 
-from eventapp import models
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import ImageForm, PostForm
 from django.contrib.auth.decorators import login_required
@@ -29,7 +31,7 @@ def index(request):
 def post(request):
 
     ImageFormSet = modelformset_factory(models.Images, form=ImageForm, extra=10)
-    #'extra' means the number of photos that you can upload   ^
+
     if request.method == "POST":
         postForm = PostForm(request.POST)
         formset = ImageFormSet(
@@ -42,8 +44,6 @@ def post(request):
             post_form.save()
             id = str(post_form.id)
             for form in formset.cleaned_data:
-                # this helps to not crash if the user
-                # do not upload all the photos
                 if form:
                     image = form["image"]
                     photo = models.Images(post=post_form, image=image)
@@ -58,29 +58,6 @@ def post(request):
     return render(
         request, "gallery/eventbase.html", {"postForm": postForm, "formset": formset}
     )
-
-
-# @login_required
-# def memberpost(request):
-#     if request.method == "POST":
-#         member = Members
-#         firstname = request.POST["first_name"]
-#         lastname = request.POST["last_name"]
-#         position = request.POST["position"]
-
-#         if firstname:
-#             member.first_name = firstname
-#         if lastname:
-#             member.last_name = lastname
-#         if position:
-#             member.position = position
-
-#         image = request.FILES("photo")
-#         if image:
-#             member.photo = image
-#         fss = FileSystemStorage()
-#         fss.save("members/" + image.name, image)
-#         return redirect()
 
 
 def showGallery(request):
@@ -123,21 +100,6 @@ def completed_events(request):
     return render(request, "completed_events.html", {"events": events})
 
 
-# class PosteventDeleteview(LoginRequiredMixin, generic.DeleteView):
-#     model = models.Postevent
-
-#     success_url = reverse_lazy("/")
-#     template_name = "gallery/deleted.html"
-
-#     # def get_queryset(self):
-#     #     queryset = super().get_queryset()
-#     #     return queryset.filter(id=self.request.id)
-
-#     def delete(self, *args, **kwargs):
-#         messages.success(self.request, "Event Deleted")
-#         return super().delete(*args, **kwargs)
-
-
 @login_required
 def deletepost(request, id):
     deleted = models.Postevent.objects.get(id=id)
@@ -149,10 +111,10 @@ def deletepost(request, id):
 def add_members(request, id):
     people = models.People.objects.all()
     try:
-        post = models.Postevent.objects.get(id=id)
+        event = models.Postevent.objects.get(id=id)
         for person in people:
             try:
-                member = models.Members.objects.filter(post=post).get(person=person)
+                member = models.Members.objects.filter(event=event).get(person=person)
                 if member:
                     person.truth = True
             except:
@@ -165,28 +127,37 @@ def add_members(request, id):
 @login_required
 def add_member(request, pid, mid):
     if request.method == "POST":
+        
         try:
-            post = models.Postevent.objects.get(id=pid)
+            event = models.Postevent.objects.get(id=pid)
             try:
+                
                 person = models.People.objects.get(id=mid)
+                
                 try:
-
-                    member = models.Members.objects.filter(person=person).get(post=post)
+                    
+                    member = models.Members.objects.filter(person=person).get(event=event)
                     if member:
                         member.delete()
                         truth = "false"
+                        
                         return JsonResponse({"data": truth})
+                    
                 except:
-
-                    nmember = models.Members()
-
+                    
+                    nmember = Members()
+                    
                     nmember.person = person
-                    nmember.post = post
+                    nmember.event = post
+                    
                     nmember.save()
-
+                    
+                    
                     return JsonResponse({"data": "true"})
+                    
+                    
             except:
-                return redirect("/")
+                return redirect("/  ")
         except:
             return redirect("/")
 

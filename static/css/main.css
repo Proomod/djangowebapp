@@ -58,6 +58,7 @@
 .upcoming:hover,
 .completed:hover {
   background-color: #ff8d1e;
+  text-decoration:none;
 }
 .img {
   border-radius: 5px;
@@ -102,12 +103,50 @@
   font-weight: bold;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-@media only screen and (max-width: 600px) {
 
-}
 .titlebox {
   position: relative;
   height: 200px;
+}
+@media only screen and (min-width: 1200px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 7%;
+    left: 35%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-100%);
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 7%;
+    left: 35%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-100%);
+  }
+  @media only screen and (max-width: 992px) {
+    .btn-group {
+      margin: 0;
+      position: absolute;
+      top: 7%;
+      left: 30%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-100%);
+    }
+  }
+  
+@media only screen and (max-width: 768px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 7%;
+    left:24%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-100%);
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -115,45 +154,31 @@
   .btn-group {
     margin: 0;
     position: absolute;
-    top: 10%;
-    left: 10rem;
+    top: 7%;
+    left: 12%;
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-100%);
   }
 }
-
-
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 1200px) {
   .btn-group {
     margin: 0;
     position: absolute;
-    top: 10%;
-    left:40%;
+    top: 7%;
+    left: 12%;
     -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    transform: translateY(-100%);
   }
+}
+}
+li a:hover{
+  text-decoration:none;
 }
 
 
-@media only screen and (max-width: 992px) {
-  .btn-group {
-    margin: 0;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-}
 
 
-@media only screen and (max-width: 1200px) {
-  .btn-group {
-    margin: 0;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-}
+
+
+
+
