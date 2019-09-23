@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/Users/promod/.virtualenvs/webdjango/bin/python",
+    "python.pythonPath": "C:\\Users\\dev\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
     "python.formatting.provider": "black"
 }

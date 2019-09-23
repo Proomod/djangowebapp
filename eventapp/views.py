@@ -7,7 +7,7 @@ from django.views import generic
 from django.http import Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-from braces.views import SelectRelatedMixin
+
 from eventapp import models
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import ImageForm, PostForm

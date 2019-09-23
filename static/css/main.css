@@ -32,7 +32,7 @@ body {
   position: absolute;
   top: 10%;
   left: 35%;
-  /* -ms-transform: translateY(-50%); */
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 .upcoming {
@@ -123,4 +123,59 @@ a:visited,
 a:link,
 a:active {
   text-decoration: none;
+}
+@media only screen and (max-width: 600px) {
+
+}
+.titlebox {
+  position: relative;
+  height: 200px;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 10rem;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left:40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+
+@media only screen and (max-width: 992px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .btn-group {
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
 }
