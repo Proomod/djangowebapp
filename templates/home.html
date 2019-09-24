@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Rajdhani:700&display=swap" rel="stylesheet">
 </head>
 
-<body class=text-white>
+<body class=text-white id="homepage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <style>
 .carousel-item {
   height: 100vh;
@@ -36,6 +36,31 @@
   background-size: cover;
     margin-top:0px;
 }
+    .navbar {
+  margin-bottom: 0;
+  background-color: #f4511e;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a{
+  color: #f4511e !important;
+  background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: #fff !important;
+}
+
 
  </style>
 
@@ -48,7 +73,7 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-    <nav class="mynavv navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar mynavv navbar-default navbar-expand-lg fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">Start Bootstrap</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,22 +82,20 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
+          <a class="nav-link " href="#home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="#about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
+          <a class="nav-link" href="#Events">Events</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="#team">Team</a>
         </li>
       </ul>
     </div>
-  </div>
+    </div>
 </nav>
      
       <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
@@ -118,6 +141,7 @@
 <div class=close-clients>
 
 </div>
+<div  id="Events">
 <div class="titlebox">
 <div class="btn-group">
 
@@ -128,8 +152,9 @@
 <br>
 
 
-<div id=upcoming_events_main>
-<main >
+
+  <div class=titlemain><h1>EVENTS</h1></div>
+<main id=upcoming_events_main>
 
 {% for event in  upcoming_events %}
 
@@ -157,9 +182,10 @@
   </div>
   
   </div>
+</div>
 
 {% endfor %}
-
+<div  id="Events">
 </main>
 <form action="../upcoming_events/" type=get>
 <button class="btn btn-primary btn-sm" type=submit>See More</button>
@@ -203,14 +229,9 @@
 </form>
   </div>
 
-
-
-
-
-
 <br><br>
-<div class=about>
-<div class=titlemain>OUR TEAM</div>
+<div class=abou>
+<div class=titlemain id=team>OUR TEAM</div>
 </div>
 <div class=row>
 {%for person in team%}
@@ -247,21 +268,20 @@
 
 
 <br><br>
-<div class=titlemain>VIDEOS</div>
-</div>
-{%for member in team%}
+<div class=titlemain id=videos>VIDEOS</div>
 <main>
+{%for member in team%}
+
 <div class=card>
 <div class=contain>
 
-<iframe width="100%" height="500" autoplay="false"
-src="https://www.youtube.com/embed/tgbNymZ7v">
+<iframe width="100%%" height="500"
+src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1">
 </iframe>
-</div>
+</div> 
 
 </div>
 {%endfor%}
-
 </main>
 <br>
 <form action="../videos" type=get>
@@ -376,11 +396,22 @@ $(document).ready(function(){
    
     
  });
- </script>  
+//  $(window).scroll(function() {
+//     if ($(window).scrollTop() >= 500) { // this refers to window
+//        $("nav").css("backgroundColor","white"); 
+//     }
+// });
+var activeNavItem = $('.nav-item');
+
+activeNavItem.click(function(){
+  activeNavItem.removeClass('active');
+  $(this).addClass('active');  
+});
+ </script>   
  <script>
  
 
- $(window).scroll(function() {
+ {% comment %} $(window).scroll(function() {
   
     if ($(window).scrollTop() >= 500) { 
     
@@ -395,7 +426,7 @@ $(document).ready(function(){
 
   
     }
-});
+}); {% endcomment %}
 
 
  
@@ -407,8 +438,6 @@ $(document).ready(function(){
 
  </script>
 
-
-  
 </body>
 
 </html>
