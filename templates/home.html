@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 <html class="no-js">
-<!--<![endif]-->
+
 
 <head>
     <meta charset="utf-8">
@@ -207,7 +207,7 @@
 
 
 
-</main>
+
 <br><br>
 <div class=about>
 <div class=titlemain>OUR TEAM</div>
@@ -229,44 +229,32 @@
 </div>
 
 {%endfor%}
+{%if user.is_authenticated%}
+<div class="col-sm-6 col-md-4 col-lg-3">
+<div class ="imagecontain">
+
+<img class="img" src="../static/icons/B&Blogo.png" style="height:100%;width:100%;object-fit:cover"> 
+<a href="/accounts/add_member_profile/"><div class="middle"><p class=text >Add Member</p></div></a>
+
 </div>
-{% comment %} <main class=main>
-<div>
-{% for person in  team %}
-
-<div class=card>
-    
-        <img class ="img" src={{person.image.url}} height=350px >
-
-  </div>
-  
- 
-  {% endfor %}
-    <div>
-  </main> {% endcomment %}
-
-{% comment %} {%if user.is_authenticated%}
-<div class=card>
-<div class=contain>
-<img src="../static/icons/B&Blogo.png" height:100%>
-<div class="middle">
-        <a href="/accounts/add_member_profile/"> <div class=text>Add Member</div></a>
-        </div>
 </div>
 
 </div>
-{%endif%} {% endcomment %}
+{%endif%}
+</div>
+
+
 
 
 <br><br>
 <div class=titlemain>VIDEOS</div>
 </div>
 {%for member in team%}
-
+<main>
 <div class=card>
 <div class=contain>
 
-<iframe width="100%%" height="500" autoplay="false"
+<iframe width="100%" height="500" autoplay="false"
 src="https://www.youtube.com/embed/tgbNymZ7v">
 </iframe>
 </div>
@@ -275,8 +263,9 @@ src="https://www.youtube.com/embed/tgbNymZ7v">
 {%endfor%}
 
 </main>
+<br>
 <form action="../videos" type=get>
-<button class="btn btn-primary btn-sm" type=submit>See More</button>
+<button class="btn btn-primary btn-sm" type=submit>More Videos</button>
 </form>
 <br><br>
 <footer id="footer" class="footer-1">
