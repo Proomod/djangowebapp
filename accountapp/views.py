@@ -4,8 +4,48 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
+from eventapp.models import People
+from django.core.files.storage import FileSystemStorage
+from django.utils.datastructures import MultiValueDictKeyError
 
-# Create your views here.
+
+def team_profile(request, id):
+    try:
+        person = People.objects.get(id=id)
+
+        return render(request, "team_profile.html", {"person": person})
+    except:
+        return redirect("/")
+
+
+def newTeamMember(request):
+    if request.method == "GET":
+        return render(request, "new_team_member.html")
+
+    if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        position = request.POST["position"]
+
+        description = request.POST["description"]
+        contact_no = request.POST["contact_no"]
+        if request.FILES:
+            image = request.FILES["image"]
+        else:
+            image = False
+        person = People()
+        person.first_name = first_name
+        person.last_name = last_name
+        person.position = position
+        if contact_no:
+            person.contact_no = contact_no
+        if description:
+            person.description = description
+        if image:
+            person.image = image
+
+        person.save()
+        return redirect("/")
 
 
 class formerror:

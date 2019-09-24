@@ -39,13 +39,16 @@
   
   </div>
 
+
 {% endfor %}
 </main>
+
 {% endblock content %}
-{{% block script %}
+
+{% block script %}
 $(document).on('click', '.confirm-delete', function(){
   {% comment %} alert("Are you sure?") {% endcomment %}
     return confirm('Are you sure you want to delete this?')
-})
+});
 
 {% endblock script %}

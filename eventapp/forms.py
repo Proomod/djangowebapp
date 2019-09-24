@@ -1,5 +1,5 @@
 from django import forms
-from .models import Postevent, Images, Members
+from .models import Postevent, Images, People
 
 
 class PostForm(forms.ModelForm):
@@ -19,12 +19,10 @@ class ImageForm(forms.ModelForm):
         fields = ("image",)
 
 
-# class Membersform(forms.ModelForm):
-#     firstname = forms.CharField(max_length=100)
-#     lastname = forms.CharField(max_length=100)
-#     position = forms.CharField(max_length=100)
+class Personimageform(forms.ModelForm):
+    personimage = forms.ImageField()
 
-#     class Meta:
-#         model = Members
-#         fields = ("first_name", "last_name", "position")
+    class Meta:
+        model = People
+        fields = ("image",)
 

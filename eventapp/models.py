@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 class Postevent(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    slug = models.SlugField(unique=True, default="duck")
+    slug = models.SlugField(unique=True, default="aewrf")
     title = models.CharField(max_length=200)
     description = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -54,11 +54,12 @@ class Images(models.Model):
 
 
 class People(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    position = models.CharField(max_length=20)
-    contact_no = models.IntegerField(10, blank=True)
-    image = models.ImageField(upload_to="people/", verbose_name="People", blank=True)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    position = models.CharField(max_length=20, blank=True, null=True)
+    description = models.TextField(blank=True)
+    contact_no = models.IntegerField(10, blank=True, null=True)
+    image = models.ImageField(upload_to="people/", null=True, blank=True)
 
 
 class Members(models.Model):

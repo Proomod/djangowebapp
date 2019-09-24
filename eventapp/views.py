@@ -8,11 +8,11 @@ from django.http import Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from .models import *
-
+import json
 
 from eventapp import models
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import ImageForm, PostForm
+from .forms import ImageForm, PostForm, Personimageform
 from django.contrib.auth.decorators import login_required
 import os
 from django.conf import settings
@@ -50,7 +50,7 @@ def post(request):
                     image = form["image"]
                     photo = models.Images(post=post_form, image=image)
                     photo.save()
-            messages.success(request, "Yeeew, check it out on the home page!")
+            messages.success(request, "Go to homepage to see changes")
             return HttpResponseRedirect("/eventapp/add_members/" + id)
         else:
             print(postForm.errors, formset.errors)
@@ -85,11 +85,24 @@ def post(request):
 #         return redirect()
 
 
+def memberimage(request):
+    if request.method == "POST":
+        form = Personimageform(request.POST, request.FILES)
+        if form.is_valid():
+            imagestored = models.People()
+            imagestored.image = form.cleaned_data["personimage"]
+            imagestored.save()
+    else:
+        form = Personimageform()
+
+    return render(request, "postimage.html", locals())
+
+
 def homePage(request):
     people = People.objects.all()
     upcoming_events = models.Postevent.objects.filter(completed=False).order_by(
         "-created_date"
-    )[:10]
+    )[:4]
     for event in upcoming_events:
         event.images = models.Images.objects.filter(post=event)[:1]
         try:
@@ -100,7 +113,7 @@ def homePage(request):
             pass
     completed_events = models.Postevent.objects.filter(completed=True).order_by(
         "-created_date"
-    )[:10]
+    )[:4]
     for event in completed_events:
         event.images = models.Images.objects.filter(post=event)[:1]
         try:
@@ -135,29 +148,114 @@ def event_detail(request, id):
 
 
 def upcoming_events(request):
+    ids = []
     events = models.Postevent.objects.filter(completed=False).order_by("-created_date")[
         :10
     ]
+    count = events.count()
+    if count == 10:
+        more = True
     for event in events:
         event.images = models.Images.objects.filter(post=event)[:1]
+        ids.append(event.id)
         try:
             memberobjs = models.Members.objects.filter(post=event)
             for memberobj in memberobjs:
                 event.person = models.People.objects.get(id=memberobj.person.id)
         except:
             pass
-            # return HttpResponse("not found")
-    return render(request, "upcoming_events.html", {"events": events})
+    ids.sort()
+    largest_id = ids[0]
+    # return HttpResponse("not found")
+    return render(
+        request,
+        "events.html",
+        {"events": events, "largest_id": largest_id, "completed": "u", "more": more},
+    )
 
 
 def completed_events(request):
+    ids = []
     events = models.Postevent.objects.filter(completed=True).order_by("-created_date")[
         :10
     ]
+    count = events.count()
+    if count == 10:
+        more = True
     for i in events:
+        ids.append(i.id)
         i.reduceddescription = i.description[:100]
         i.images = models.Images.objects.filter(post=i)
-    return render(request, "completed_events.html", {"events": events})
+    ids.sort()
+    largest_id = ids[0]
+    return render(
+        request,
+        "events.html",
+        {"events": events, "largest_id": largest_id, "completed": "c", "more": more},
+    )
+
+
+def more_events(request, c, id):
+    ids = []
+    more = False
+    if c == "c":
+        try:
+            events = (
+                Postevent.objects.filter(id__lte=id)
+                .filter(completed=True)
+                .order_by("-created_date")[:10]
+            )
+            count = events.count()
+            if count == 10:
+                more = True
+            for i in events:
+                ids.append(i.id)
+                i.reduceddescription = i.description[:100]
+                i.images = models.Images.objects.filter(post=i)
+                ids.sort()
+                largest_id = ids[0]
+        except:
+            events = []
+
+        return render(
+            request,
+            "events.html",
+            {
+                "events": events,
+                "largest_id": largest_id,
+                "completed": "c",
+                "more": more,
+            },
+        )
+    elif c == "u":
+
+        events = (
+            Postevent.objects.filter(id__lte=id)
+            .filter(completed=False)
+            .order_by("-created_date")[:10]
+        )
+        count = events.count()
+        if count == 10:
+            more = True
+
+        for i in events:
+            ids.append(i.id)
+            i.reduceddescription = i.description[:100]
+            i.images = models.Images.objects.filter(post=i)
+        ids.sort()
+        largest_id = ids[0]
+        return render(
+            request,
+            "events.html",
+            {
+                "events": events,
+                "largest_id": largest_id,
+                "completed": "c",
+                "more": more,
+            },
+        )
+    else:
+        return redirect("/")
 
 
 @login_required
