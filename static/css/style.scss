@@ -1,21 +1,3 @@
-body,
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: "Montserrat";
-
-  background: radial-gradient(50% 50% at 50% 50%, #2b3780 0%, #0b1023 100%);
-
-  font-family: "Manjari", sans-serif;
-}
-
-h1 {
-  margin: 5rem;
-}
-
 main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));

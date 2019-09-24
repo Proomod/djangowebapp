@@ -74,7 +74,7 @@
     </div>
   </div>
 </nav>
-      <!-- Slide One - Set the background image for this slide in the line below -->
+     
       <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">First Slide</h2>
@@ -107,13 +107,14 @@
   </div>
 </header>
 
-<div class=about >
-<strong class=title>ABOUT</strong>
+<div class="about jumbotron" id=about >
+<strong class=titlemain>ABOUT</strong>
 <p >{% lorem 5 %}</p>
 <form action="../about" type=get>
 <button class="btn btn-primary btn-sm" type=submit>Read More</button>
+</div>
 </form>
-<div class=title>TOP CLIENTS</div>
+<div class=titlemain>TOP CLIENTS</div>
 <div class=close-clients>
 
 </div>
@@ -127,8 +128,8 @@
 <br>
 
 
-
-<main id=upcoming_events_main>
+<div id=upcoming_events_main>
+<main >
 
 {% for event in  upcoming_events %}
 
@@ -160,11 +161,13 @@
 {% endfor %}
 
 </main>
-<form action="../upcoming_eevnts" type=get>
+<form action="../upcoming_events/" type=get>
 <button class="btn btn-primary btn-sm" type=submit>See More</button>
 </form>
+</div>
 
-<main id=completed_events_main style="display:none">
+<div id=completed_events_main style="display:none">
+<main>
 
 {% for event in  completed_events %}
 
@@ -193,10 +196,12 @@
   
   </div>
   {% endfor %}
-  <form action="../completed_events" type=get>
+    
+  </main>
+  <form action="../completedevents/" type=get>
 <button class="btn btn-primary btn-sm" type=submit>See More</button>
 </form>
-  </main>
+  </div>
 
 
 
@@ -205,36 +210,64 @@
 </main>
 <br><br>
 <div class=about>
-<div class=title>OUR TEAM</div>
+<div class=titlemain>OUR TEAM</div>
 </div>
-<div class=member_container>
-<main>
-{%for member in team%}
+<div class=row>
+{%for person in team%}
+<div class="col-sm-6 col-md-4 col-lg-3">
+<div class ="imagecontain">
+
+<img class="img" src={{person.image.url}} style="height:100%;width:100%;object-fit:cover"> 
+<a href="/accounts/team_profile/{{person.id}}/"><div class="middle"><p class=text >View Profile</p></div></a>
+
+<div class="profilename">
+<div class="name">{{person.first_name}} {{person.last_name}}</div>
+<div class= "position">{{person.position}}</div>
+</div>
+</div>
+
+</div>
+
+{%endfor%}
+</div>
+{% comment %} <main class=main>
+<div>
+{% for person in  team %}
 
 <div class=card>
+    
+        <img class ="img" src={{person.image.url}} height=350px >
+
+  </div>
+  
+ 
+  {% endfor %}
+    <div>
+  </main> {% endcomment %}
+
+{% comment %} {%if user.is_authenticated%}
+<div class=card>
 <div class=contain>
-<img src="..{{member.image.url}}" height:100%>
+<img src="../static/icons/B&Blogo.png" height:100%>
 <div class="middle">
-        <a href="../team_profile/{{member.id}}"> <div class=text>{{member.first_name}}</div></a>
+        <a href="/accounts/add_member_profile/"> <div class=text>Add Member</div></a>
         </div>
 </div>
-<div class="member_name">
-{{member.first_name}} {{member.last_name}}
+
 </div>
-</div>
-{%endfor%}
-</main>
-</div>
+{%endif%} {% endcomment %}
+
+
 <br><br>
-<div class=title>VIDEOS</div>
-<main>
+<div class=titlemain>VIDEOS</div>
+</div>
 {%for member in team%}
 
 <div class=card>
 <div class=contain>
 
-<iframe width="100%%" height="500"
-src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1">
+<iframe width="100%%" height="500" autoplay="false"
+src="https://www.youtube.com/embed/tgbNymZ7v">
 </iframe>
 </div>
 
@@ -332,26 +365,53 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1">
     <script src="{% static 'js/bootstrap.min.js' %}" async defer></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
  <script>
-
+$(document).ready(function(){
+  $(".upcoming").css({"backgroundColor":"#ff8d1e","color":"white"});
+});
+</script>
+<script>
  $(".upcoming").click(function(e){
      
          $("#upcoming_events_main").css("display","block");
          $("#completed_events_main").css("display","none");
-         $("nav").css("backgroundColor","white");
+         $(".completed").css({"backgroundColor":"","color":"#ff8d1e"});
+         $(".upcoming").css({"backgroundColor":"#ff8d1e","color":"white"});
+         
  })
      $(".completed").click(function(e){
-         
+         $(".upcoming").css({"backgroundColor":"","color":"#ff8d1e"});
+         $(".completed").css({"backgroundColor":"#ff8d1e","color":"white"});
          $("#upcoming_events_main").css("display","none");
          $("#completed_events_main").css("display","block");
      
-     
+   
     
  });
+ </script>  
+ <script>
+ 
+
  $(window).scroll(function() {
-    if ($(window).scrollTop() >= 500) { // this refers to window
+  
+    if ($(window).scrollTop() >= 500) { 
+    
        $("nav").css("backgroundColor","white"); 
+
+  
+    }
+    
+     else if ($(window).scrollTop() < 500) { 
+    
+       $("nav").css("backgroundColor","none"); 
+
+  
     }
 });
+
+
+ 
+
+
 
     
      

@@ -13,5 +13,7 @@ urlpatterns = [
     path("delete/<int:id>/", views.deletepost, name="delete"),
     path("eventapp/add_members/<int:id>", views.add_members, name="addmember"),
     path("eventapp/add_member/<int:pid>/<int:mid>", views.add_member, name="addmember"),
+    path("postimage/", views.memberimage),
+    path("more_events/<str:c>/<int:id>/", views.more_events),
 ]
 
